@@ -1,4 +1,4 @@
-package SearchNSort;
+//package SearchNSort;
 
 import java.util.Scanner;
 
@@ -172,7 +172,111 @@ public class LinSearch {
         }
     }
 
+    public static class Matrix{
+        Matrix(){
+            Scanner scIn = new Scanner(System.in);
+            int n = scIn.nextInt();
+            int m = scIn.nextInt();
+            int[][] arr = new int[n][m];
+            for(int i = 0; i < n; i++){
+                for (int j = 0; j < m; j ++){
+                    arr[i][j] = scIn.nextInt();
+                }
+            }
+            saddlePointsCount(n, m, arr);
+        }
+        public void saddlePointsCount(int n, int m, int[][] arr){
+            int[] mins = new int[n];
+            int[] maxs = new int[m];
+
+            for(int i = 0; i < n; i++){
+                for (int j = 0; j < m; j++){
+                    if (arr[i][j] < arr[i][mins[i]]) {
+                        mins[i] = j;
+                    }
+                    if (arr[i][j] > arr[maxs[j]][j]) {
+                        maxs[j] = i;
+                    }
+                }
+            }
+            int count = 0;
+            for(int i = 0; i < n; i++){
+                for (int j = 0; j < m; j++){
+                    if (arr[i][j] == arr[maxs[j]][j] && arr[i][j] == arr[i][mins[i]]){
+                        count++;
+                    }
+                }
+            }
+            System.out.println(count);
+        }
+    }
+
+    public static class SilverMedal{
+        SilverMedal(){
+            Scanner scIn = new Scanner(System.in);
+            int n = scIn.nextInt();
+            int[] arr = new int[n];
+            for(int i = 0; i < n; i++){
+                arr[i] = scIn.nextInt();
+            }
+            pointsSilver(n, arr);
+        }
+        public void pointsSilver(int n, int[] arr){
+            int gold = 0, silver = 1;
+            if (arr[gold] < arr[silver]){
+                gold = 1;
+                silver = 0;
+            }
+
+            for(int i = 2; i < n; i++){
+                if (arr[i] > arr[gold]){
+                    silver = gold;
+                    gold = i;
+                } else if (arr[i] == arr[gold]) {
+                } else if (arr[i] > arr[silver]) {
+                    silver = i;
+                }
+            }
+
+            System.out.println(arr[silver]);
+        }
+    }
+
+    public static class Controperation{
+        Controperation(){
+            Scanner scIn = new Scanner(System.in);
+            int n = scIn.nextInt();
+            int[] arr = new int[n];
+            for(int i = 0; i < n; i++){
+                arr[i] = scIn.nextInt();
+            }
+            changeMarks(n, arr);
+        }
+        public void changeMarks(int n, int[] arr){
+            int min_i = 0, max_i = 0;
+
+
+            for(int i = 1; i < n; i++){
+                if (arr[i] > arr[max_i]){
+                    max_i = i;
+                }
+                if (arr[i] < arr[min_i]){
+                    min_i = i;
+                }
+            }
+            int max = arr[max_i];
+            for(int i = 0; i < n; i++){
+                if (arr[i] == max){
+                    arr[i] = arr[min_i];
+                }
+            }
+            for(int i = 0; i < n; i++){
+                System.out.println(arr[i]);
+            }
+        }
+    }
+
     public static void main(String[] args) {
-        new Column();
+        new Controperation();
     }
 }
