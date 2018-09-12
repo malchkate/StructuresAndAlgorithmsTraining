@@ -1,4 +1,4 @@
-//package SearchNSort;
+package SearchNSort;
 
 import java.util.Scanner;
 
